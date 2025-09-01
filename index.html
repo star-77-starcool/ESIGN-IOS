@@ -1,82 +1,161 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>eSign Hub</title>
-<style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif}
-body{background:#111;color:#f5f5f7;transition:.3s}
-body.light{background:#f5f5f7;color:#111}
-header{display:flex;justify-content:center;padding:20px}
-header img{width:80px;height:80px;border-radius:50%;border:3px solid #0a84ff}
-nav{display:flex;justify-content:center;gap:20px;margin:20px}
-nav a{padding:10px 20px;border-radius:20px;text-decoration:none;font-weight:600;background:rgba(255,255,255,.1);color:inherit}
-.container{display:none;max-width:900px;margin:auto;padding:20px}
-.container.active{display:block}
-h2{text-align:center;margin-bottom:20px}
-ul{list-style:none;display:flex;flex-direction:column;gap:15px}
-li{display:flex;justify-content:space-between;align-items:center;padding:15px;border-radius:14px;background:rgba(255,255,255,.08)}
-.link-item{display:flex;align-items:center;gap:10px;font-weight:600}
-.link-item img{width:32px;height:32px;border-radius:50%}
-.download-btn{display:flex;align-items:center;gap:8px;padding:8px 16px;border-radius:10px;background:#0a84ff;color:#fff;text-decoration:none;font-weight:600}
-.download-btn img{width:20px;height:20px;border-radius:4px}
-.theme-toggle{position:fixed;top:20px;right:20px;padding:8px 16px;border-radius:20px;border:none;cursor:pointer;background:#0a84ff;color:#fff}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>eSign Hub</title>
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif}
+    body{background:#111;color:#f5f5f7;transition:background .4s,color .4s}
+    body.light{background:#f5f5f7;color:#111}
+    header{display:flex;align-items:center;justify-content:center;padding:25px;border-bottom:1px solid rgba(255,255,255,.1)}
+    body.light header{border-color:rgba(0,0,0,.1)}
+    header img{width:80px;height:80px;border-radius:50%;object-fit:cover;border:3px solid #0a84ff;box-shadow:0 0 16px rgba(10,132,255,.5)}
+
+    nav{display:flex;justify-content:center;gap:28px;margin:20px 0 32px}
+    nav a{padding:12px 26px;border-radius:22px;text-decoration:none;font-weight:700;font-size:18px;transition:all .3s}
+    body.dark nav a{color:#f5f5f7;background:rgba(255,255,255,.08)}
+    body.light nav a{color:#111;background:rgba(0,0,0,.08)}
+    nav a:hover{transform:scale(1.1)}
+
+    .container{display:none;padding:25px;max-width:1000px;margin:auto}
+    .container.active{display:block}
+    h2{margin-bottom:25px;font-size:28px;font-weight:700;text-align:center}
+
+    ul{list-style:none;display:flex;flex-direction:column;gap:20px}
+    li{display:flex;align-items:center;justify-content:space-between;
+        padding:20px 24px;border-radius:18px;font-size:20px;
+        transition:all .3s}
+    body.dark li{background:rgba(255,255,255,.06)}
+    body.light li{background:rgba(0,0,0,.06)}
+    li:hover{transform:translateY(-3px);box-shadow:0 6px 18px rgba(0,0,0,.25)}
+
+    .link-item{display:flex;align-items:center;gap:14px;font-weight:600;font-size:20px;color:inherit;flex:1}
+
+    .download-btn{padding:10px 20px;border-radius:12px;font-size:16px;font-weight:600;text-decoration:none;transition:.3s;display:inline-block}
+    body.dark .download-btn{background:#0a84ff;color:white}
+    body.light .download-btn{background:#007aff;color:white}
+    .download-btn:hover{transform:scale(1.05);box-shadow:0 4px 14px rgba(0,0,0,.3)}
+
+    .coming{text-align:center;font-size:26px;font-weight:600;opacity:.8;margin-top:40px}
+
+    .theme-toggle{position:fixed;top:20px;right:20px;padding:12px 22px;border:none;border-radius:20px;cursor:pointer;font-weight:600;font-size:16px;transition:.3s}
+    body.dark .theme-toggle{background:#0a84ff;color:white}
+    body.light .theme-toggle{background:#007aff;color:white}
+  </style>
 </head>
 <body class="dark">
-<header><img src="https://khoindvn.io.vn/img/pf/profile-pic.png"></header>
-<nav>
-  <a href="#esign">ESign</a>
-  <a href="#cert">Certificates</a>
-  <a href="#dns">DNS</a>
-  <a href="#ksign">KSign</a>
-</nav>
+  <header>
+    <img src="https://khoindvn.io.vn/img/pf/profile-pic.png" alt="Logo">
+  </header>
 
-<div class="container active" id="esign">
-<h2>ESign Apps</h2><ul>
-<li><span class="link-item"><img src="https://khoindvn.io.vn/img/pf/profile-pic.png">ESign ✅ GLOBAL TAKEOFF, INC</span><a class="download-btn" href="https://authtool.app/app-store/nAHgTgSYRq"><img src="https://khoindvn.io.vn/img/pf/profile-pic.png">Download</a></li>
-<li><span class="link-item"><img src="https://khoindvn.io.vn/img/pf/profile-pic.png">ESign Tianjin University of Commerce</span><a class="download-btn" href="https://authtool.app/app-store/t4bpVBfp23"><img src="https://khoindvn.io.vn/img/pf/profile-pic.png">Download</a></li>
-<li><span class="link-item"><img src="https://khoindvn.io.vn/img/pf/profile-pic.png">ESign BMW Brilliance Automotive Ltd</span><a class="download-btn" href="https://authtool.app/app-store/5xSKZxvTfs"><img src="https://khoindvn.io.vn/img/pf/profile-pic.png">Download</a></li>
-<li><span class="link-item"><img src="https://khoindvn.io.vn/img/pf/profile-pic.png">ESign VIETNAM JOINT STOCK COMMERCIAL BANK FOR INDUSTRY AND TRADE</span><a class="download-btn" href="https://authtool.app/app-store/y649WtILBw"><img src="https://khoindvn.io.vn/img/pf/profile-pic.png">Download</a></li>
-<li><span class="link-item"><img src="https://khoindvn.io.vn/img/pf/profile-pic.png">ESign VIETTEL GROUP</span><a class="download-btn" href="https://authtool.app/app-store/riMS9UyHoQ"><img src="https://khoindvn.io.vn/img/pf/profile-pic.png">Download</a></li>
-<li><span class="link-item"><img src="https://khoindvn.io.vn/img/pf/profile-pic.png">ESign CHIBA INSTITUTE OF TECHNOLOGY</span><a class="download-btn" href="https://authtool.app/app-store/gClSJlDteE"><img src="https://khoindvn.io.vn/img/pf/profile-pic.png">Download</a></li>
-<li><span class="link-item"><img src="https://khoindvn.io.vn/img/pf/profile-pic.png">ESign Beijing Esensoft Co., Ltd</span><a class="download-btn" href="https://authtool.app/app-store/rPNr5Procw"><img src="https://khoindvn.io.vn/img/pf/profile-pic.png">Download</a></li>
-<li><span class="link-item"><img src="https://khoindvn.io.vn/img/pf/profile-pic.png">ESign NREH ESTATE INFORMATION TECHNOLOGY CO.,LTD</span><a class="download-btn" href="https://authtool.app/app-store/I65qsM4tuy"><img src="https://khoindvn.io.vn/img/pf/profile-pic.png">Download</a></li>
-<li><span class="link-item"><img src="https://khoindvn.io.vn/img/pf/profile-pic.png">ESign China Railway Eryuan Engineering Group Co., Ltd.</span><a class="download-btn" href="https://authtool.app/app-store/ox7O1yac1w"><img src="https://khoindvn.io.vn/img/pf/profile-pic.png">Download</a></li>
-<li><span class="link-item"><img src="https://khoindvn.io.vn/img/pf/profile-pic.png">ESign EEO Education ltd</span><a class="download-btn" href="https://authtool.app/app-store/ckT3TDEz8a"><img src="https://khoindvn.io.vn/img/pf/profile-pic.png">Download</a></li>
-<li><span class="link-item"><img src="https://khoindvn.io.vn/img/pf/profile-pic.png">ESign TCL household Appliance Marketing Co., LTD</span><a class="download-btn" href="https://authtool.app/app-store/jtgd18Qy0i"><img src="https://khoindvn.io.vn/img/pf/profile-pic.png">Download</a></li>
-<li><span class="link-item"><img src="https://khoindvn.io.vn/img/pf/profile-pic.png">ESign Wuling Power Corporation</span><a class="download-btn" href="https://authtool.app/app-store/0dnOlp0bhT"><img src="https://khoindvn.io.vn/img/pf/profile-pic.png">Download</a></li>
-<li><span class="link-item"><img src="https://khoindvn.io.vn/img/pf/profile-pic.png">ESign GAC TOYOTA MOTOR CO.,LTD</span><a class="download-btn" href="https://authtool.app/app-store/R8Jqm1Cszg"><img src="https://khoindvn.io.vn/img/pf/profile-pic.png">Download</a></li>
-</ul></div>
+  <nav>
+    <a href="#esign">ESign</a>
+    <a href="#certificates">Certificates</a>
+    <a href="#dns">DNS</a>
+    <a href="#ksign">KSign</a>
+  </nav>
 
-<div class="container" id="cert"><h2>Certificates</h2><ul>
-<li><span class="link-item"><img src="https://khoindvn.io.vn/img/pf/profile-pic.png">Beijing Esensoft Co., Ltd</span><a class="download-btn" href="https://www.mediafire.com/file/7wh4eolid4mhusk/Beijing_Esensoft_Co.%252C_Ltd..esigncert/file"><img src="https://khoindvn.io.vn/img/pf/profile-pic.png">Download</a></li>
-<li><span class="link-item"><img src="https://khoindvn.io.vn/img/pf/profile-pic.png">BMW Brilliance Automotive Ltd</span><a class="download-btn" href="https://www.mediafire.com/file/kz8myf2yu90yfuo/BMW_Brilliance_Automotive_Ltd..esigncert/file"><img src="https://khoindvn.io.vn/img/pf/profile-pic.png">Download</a></li>
-<li><span class="link-item"><img src="https://khoindvn.io.vn/img/pf/profile-pic.png">CHIBA INSTITUTE OF TECHNOLOGY</span><a class="download-btn" href="https://www.mediafire.com/file/ykv89uksqpjgppm/CHIBA_INSTITUTE_OF_TECHNOLOGY.esigncert/file"><img src="https://khoindvn.io.vn/img/pf/profile-pic.png">Download</a></li>
-<li><span class="link-item"><img src="https://khoindvn.io.vn/img/pf/profile-pic.png">China Railway Eryuan Engineering Group</span><a class="download-btn" href="https://www.mediafire.com/file/zgvgrkvkeumu9rv/China_Railway_Eryuan_Engineering_Group_Co.%252C_Ltd..esigncert/file"><img src="https://khoindvn.io.vn/img/pf/profile-pic.png">Download</a></li>
-<li><span class="link-item"><img src="https://khoindvn.io.vn/img/pf/profile-pic.png">EEO Education Ltd</span><a class="download-btn" href="https://www.mediafire.com/file/wbi3h1tm33piugl/EEO_Education_Ltd..esigncert/file"><img src="https://khoindvn.io.vn/img/pf/profile-pic.png">Download</a></li>
-<li><span class="link-item"><img src="https://khoindvn.io.vn/img/pf/profile-pic.png">GAC TOYOTA MOTOR CO.,LTD</span><a class="download-btn" href="https://www.mediafire.com/file/b7no9uwb6c96wa7/GAC_TOYOTA_MOTOR_CO.%252CLTD.esigncert/file"><img src="https://khoindvn.io.vn/img/pf/profile-pic.png">Download</a></li>
-<li><span class="link-item"><img src="https://khoindvn.io.vn/img/pf/profile-pic.png">GLOBAL TAKEOFF, INC</span><a class="download-btn" href="https://www.mediafire.com/file/nuh39kdzopyjcr8/GLOBAL_TAKEOFF%252C_INC.esigncert/file"><img src="https://khoindvn.io.vn/img/pf/profile-pic.png">Download</a></li>
-<li><span class="link-item"><img src="https://khoindvn.io.vn/img/pf/profile-pic.png">NREH ESTATE INFORMATION TECHNOLOGY</span><a class="download-btn" href="https://www.mediafire.com/file/767z9dof0r4f0xe/NREH_ESTATE_INFORMATION_TECHNOLOGY_CO.%252CLTD..esigncert/file"><img src="https://khoindvn.io.vn/img/pf/profile-pic.png">Download</a></li>
-<li><span class="link-item"><img src="https://khoindvn.io.vn/img/pf/profile-pic.png">TCL household Appliance Marketing</span><a class="download-btn" href="https://www.mediafire.com/file/wlz5543l64e7wck/TCL_household_Appliance_Marketing_Co.%252C_LTD.esigncert/file"><img src="https://khoindvn.io.vn/img/pf/profile-pic.png">Download</a></li>
-<li><span class="link-item"><img src="https://khoindvn.io.vn/img/pf/profile-pic.png">Tianjin University of Commerce</span><a class="download-btn" href="https://www.mediafire.com/file/x7aowskezgodxji/Tianjin_University_of_Commerce.esigncert/file"><img src="https://khoindvn.io.vn/img/pf/profile-pic.png">Download</a></li>
-<li><span class="link-item"><img src="https://khoindvn.io.vn/img/pf/profile-pic.png">VIETNAM JOINT STOCK COMMERCIAL BANK</span><a class="download-btn" href="https://www.mediafire.com/file/jutoz8gub5lrsr2/VIETNAM_JOINT_STOCK_COMMERCIAL_BANK_FOR_INDUSTRY_AND_TRADE.esigncert/file"><img src="https://khoindvn.io.vn/img/pf/profile-pic.png">Download</a></li>
-<li><span class="link-item"><img src="https://khoindvn.io.vn/img/pf/profile-pic.png">VIETTEL GROUP</span><a class="download-btn" href="https://www.mediafire.com/file/cp2moy7c42708mw/VIETTEL_GROUP.esigncert/file"><img src="https://khoindvn.io.vn/img/pf/profile-pic.png">Download</a></li>
-<li><span class="link-item"><img src="https://khoindvn.io.vn/img/pf/profile-pic.png">Wuling Power Corporation</span><a class="download-btn" href="https://www.mediafire.com/file/1lrmulnt0ngy5fs/Wuling_Power_Corporation.esigncert/file"><img src="https://khoindvn.io.vn/img/pf/profile-pic.png">Download</a></li>
-</ul></div>
+  <!-- ESign -->
+  <div class="container active" id="esign">
+    <h2>ESign Apps</h2>
+    <ul>
+      <li><span class="link-item">ESign ✅ GLOBAL TAKEOFF, INC</span>
+        <a class="download-btn" href="https://authtool.app/app-store/nAHgTgSYRq" target="_blank" rel="noopener noreferrer">Download</a></li>
+      <li><span class="link-item">ESign Tianjin University of Commerce</span>
+        <a class="download-btn" href="https://authtool.app/app-store/t4bpVBfp23" target="_blank" rel="noopener noreferrer">Download</a></li>
+      <li><span class="link-item">ESign BMW Brilliance Automotive Ltd</span>
+        <a class="download-btn" href="https://authtool.app/app-store/5xSKZxvTfs" target="_blank" rel="noopener noreferrer">Download</a></li>
+      <li><span class="link-item">ESign VIETNAM JOINT STOCK COMMERCIAL BANK FOR INDUSTRY AND TRADE</span>
+        <a class="download-btn" href="https://authtool.app/app-store/y649WtILBw" target="_blank" rel="noopener noreferrer">Download</a></li>
+      <li><span class="link-item">ESign VIETTEL GROUP</span>
+        <a class="download-btn" href="https://authtool.app/app-store/riMS9UyHoQ" target="_blank" rel="noopener noreferrer">Download</a></li>
+      <li><span class="link-item">ESign CHIBA INSTITUTE OF TECHNOLOGY</span>
+        <a class="download-btn" href="https://authtool.app/app-store/gClSJlDteE" target="_blank" rel="noopener noreferrer">Download</a></li>
+      <li><span class="link-item">ESign Beijing Esensoft Co., Ltd</span>
+        <a class="download-btn" href="https://authtool.app/app-store/rPNr5Procw" target="_blank" rel="noopener noreferrer">Download</a></li>
+      <li><span class="link-item">ESign NREH ESTATE INFORMATION TECHNOLOGY CO.,LTD</span>
+        <a class="download-btn" href="https://authtool.app/app-store/I65qsM4tuy" target="_blank" rel="noopener noreferrer">Download</a></li>
+      <li><span class="link-item">ESign China Railway Eryuan Engineering Group Co., Ltd.</span>
+        <a class="download-btn" href="https://authtool.app/app-store/ox7O1yac1w" target="_blank" rel="noopener noreferrer">Download</a></li>
+      <li><span class="link-item">ESign EEO Education ltd</span>
+        <a class="download-btn" href="https://authtool.app/app-store/ckT3TDEz8a" target="_blank" rel="noopener noreferrer">Download</a></li>
+      <li><span class="link-item">ESign TCL household Appliance Marketing Co., LTD</span>
+        <a class="download-btn" href="https://authtool.app/app-store/jtgd18Qy0i" target="_blank" rel="noopener noreferrer">Download</a></li>
+      <li><span class="link-item">ESign Wuling Power Corporation</span>
+        <a class="download-btn" href="https://authtool.app/app-store/0dnOlp0bhT" target="_blank" rel="noopener noreferrer">Download</a></li>
+      <li><span class="link-item">ESign GAC TOYOTA MOTOR CO.,LTD</span>
+        <a class="download-btn" href="https://authtool.app/app-store/R8Jqm1Cszg" target="_blank" rel="noopener noreferrer">Download</a></li>
+    </ul>
+  </div>
 
-<div class="container" id="dns"><h2>DNS</h2><ul>
-<li><span class="link-item"><img src="https://khoindvn.io.vn/img/pf/profile-pic.png">Install DNS Profile</span><a class="download-btn" href="https://tinyurl.com/5py6ts5a"><img src="https://khoindvn.io.vn/img/pf/profile-pic.png">Download</a></li>
-</ul></div>
+  <!-- Certificates -->
+  <div class="container" id="certificates">
+    <h2>Certificates</h2>
+    <ul>
+      <li><span class="link-item">Beijing Esensoft Co., Ltd</span>
+        <a class="download-btn" href="https://www.mediafire.com/file/7wh4eolid4mhusk/Beijing_Esensoft_Co.%252C_Ltd..esigncert/file" target="_blank" rel="noopener noreferrer">Download</a></li>
+      <li><span class="link-item">BMW Brilliance Automotive Ltd</span>
+        <a class="download-btn" href="https://www.mediafire.com/file/kz8myf2yu90yfuo/BMW_Brilliance_Automotive_Ltd..esigncert/file" target="_blank" rel="noopener noreferrer">Download</a></li>
+      <li><span class="link-item">CHIBA INSTITUTE OF TECHNOLOGY</span>
+        <a class="download-btn" href="https://www.mediafire.com/file/ykv89uksqpjgppm/CHIBA_INSTITUTE_OF_TECHNOLOGY.esigncert/file" target="_blank" rel="noopener noreferrer">Download</a></li>
+      <li><span class="link-item">China Railway Eryuan Engineering Group Co., Ltd.</span>
+        <a class="download-btn" href="https://www.mediafire.com/file/zgvgrkvkeumu9rv/China_Railway_Eryuan_Engineering_Group_Co.%252C_Ltd..esigncert/file" target="_blank" rel="noopener noreferrer">Download</a></li>
+      <li><span class="link-item">EEO Education Ltd</span>
+        <a class="download-btn" href="https://www.mediafire.com/file/wbi3h1tm33piugl/EEO_Education_Ltd..esigncert/file" target="_blank" rel="noopener noreferrer">Download</a></li>
+      <li><span class="link-item">GAC TOYOTA MOTOR CO.,LTD</span>
+        <a class="download-btn" href="https://www.mediafire.com/file/b7no9uwb6c96wa7/GAC_TOYOTA_MOTOR_CO.%252CLTD.esigncert/file" target="_blank" rel="noopener noreferrer">Download</a></li>
+      <li><span class="link-item">GLOBAL TAKEOFF, INC</span>
+        <a class="download-btn" href="https://www.mediafire.com/file/nuh39kdzopyjcr8/GLOBAL_TAKEOFF%252C_INC.esigncert/file" target="_blank" rel="noopener noreferrer">Download</a></li>
+      <li><span class="link-item">NREH ESTATE INFORMATION TECHNOLOGY CO.,LTD</span>
+        <a class="download-btn" href="https://www.mediafire.com/file/767z9dof0r4f0xe/NREH_ESTATE_INFORMATION_TECHNOLOGY_CO.%252CLTD..esigncert/file" target="_blank" rel="noopener noreferrer">Download</a></li>
+      <li><span class="link-item">TCL household Appliance Marketing Co., LTD</span>
+        <a class="download-btn" href="https://www.mediafire.com/file/wlz5543l64e7wck/TCL_household_Appliance_Marketing_Co.%252C_LTD.esigncert/file" target="_blank" rel="noopener noreferrer">Download</a></li>
+      <li><span class="link-item">Tianjin University of Commerce</span>
+        <a class="download-btn" href="https://www.mediafire.com/file/x7aowskezgodxji/Tianjin_University_of_Commerce.esigncert/file" target="_blank" rel="noopener noreferrer">Download</a></li>
+      <li><span class="link-item">VIETNAM JOINT STOCK COMMERCIAL BANK FOR INDUSTRY AND TRADE</span>
+        <a class="download-btn" href="https://www.mediafire.com/file/jutoz8gub5lrsr2/VIETNAM_JOINT_STOCK_COMMERCIAL_BANK_FOR_INDUSTRY_AND_TRADE.esigncert/file" target="_blank" rel="noopener noreferrer">Download</a></li>
+      <li><span class="link-item">VIETTEL GROUP</span>
+        <a class="download-btn" href="https://www.mediafire.com/file/cp2moy7c42708mw/VIETTEL_GROUP.esigncert/file" target="_blank" rel="noopener noreferrer">Download</a></li>
+      <li><span class="link-item">Wuling Power Corporation</span>
+        <a class="download-btn" href="https://www.mediafire.com/file/1lrmulnt0ngy5fs/Wuling_Power_Corporation.esigncert/file" target="_blank" rel="noopener noreferrer">Download</a></li>
+    </ul>
+  </div>
 
-<div class="container" id="ksign"><h2>KSign</h2><p style="text-align:center;font-size:20px">🚀 Coming soon...</p></div>
+  <!-- DNS -->
+  <div class="container" id="dns">
+    <h2>DNS</h2>
+    <ul>
+      <li><span class="link-item">Install DNS Profile</span>
+        <a class="download-btn" href="https://tinyurl.com/5py6ts5a" target="_blank" rel="noopener noreferrer">Download</a></li>
+    </ul>
+  </div>
 
-<button class="theme-toggle" id="themeToggle">🌙</button>
-<script>
-const navLinks=document.querySelectorAll("nav a"),containers=document.querySelectorAll(".container");
-navLinks.forEach(l=>l.onclick=e=>{e.preventDefault();containers.forEach(c=>c.classList.remove("active"));document.querySelector(l.getAttribute("href")).classList.add("active")});
-document.getElementById("themeToggle").onclick=()=>{document.body.classList.toggle("light");document.body.classList.toggle("dark")};
-</script>
+  <!-- KSign -->
+  <div class="container" id="ksign">
+    <h2>KSign</h2>
+    <div class="coming">🚀 Coming soon...</div>
+  </div>
+
+  <button class="theme-toggle" id="themeToggle">🌙 Dark</button>
+
+  <script>
+    const navLinks=document.querySelectorAll("nav a");
+    const containers=document.querySelectorAll(".container");
+    navLinks.forEach(link=>{
+      link.addEventListener("click",e=>{
+        e.preventDefault();
+        const target=link.getAttribute("href").substring(1);
+        containers.forEach(c=>c.classList.remove("active"));
+        document.getElementById(target).classList.add("active");
+      })
+    });
+    const btn=document.getElementById("themeToggle");
+    btn.addEventListener("click",()=>{
+      document.body.classList.toggle("light");
+      document.body.classList.toggle("dark");
+      btn.textContent=document.body.classList.contains("light")?"☀️ Light":"🌙 Dark";
+    })
+  </script>
 </body>
 </html>
