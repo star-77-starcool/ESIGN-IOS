@@ -1,641 +1,413 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TRANG WEB TẢI ESIGN</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>ESIGN AND KSIGN PAGE (V2)</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f3f4f6;
-            color: #1f2937;
-            padding: 2rem;
-            transition: background-color 0.3s ease, color 0.3s ease;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            transition: background-color 0.3s, color 0.3s;
         }
-        .container {
-            max-width: 900px;
-            margin: auto;
-            background-color: #ffffff;
-            border-radius: 1rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-            position: relative;
+        body.light {
+            background-color: #f0f2f5;
+            color: #333;
         }
-        .header {
+        body.dark {
+            background-color: #1a1a1a;
+            color: #e0e0e0;
+        }
+        .navbar {
+            width: 100%;
+            padding: 15px;
             display: flex;
             justify-content: center;
-            align-items: center;
-            padding: 1.5rem;
-            border-bottom: 2px solid #e5e7eb;
-            background-color: #f9fafb;
+            gap: 20px;
+            position: fixed;
+            top: 0;
+            z-index: 1000;
+            transition: background-color 0.3s;
         }
-        .logo-container {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            overflow: hidden;
-            border: 3px solid #6b7280;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        body.light .navbar {
+            background-color: #333;
         }
-        .logo {
-            width: 100%;
-            height: auto;
+        body.dark .navbar {
+            background-color: #2c2c2c;
         }
-        .tabs {
-            display: flex;
-            background-color: #e5e7eb;
-            border-bottom: 2px solid #d1d5db;
-        }
-        .tab-button {
-            flex: 1;
-            padding: 1rem 0;
-            text-align: center;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            color: #4b5563;
-        }
-        .tab-button.active {
-            background-color: #ffffff;
-            color: #1f2937;
-            border-bottom: 2px solid #2563eb;
-        }
-        .tab-content {
-            padding: 2rem;
-        }
-        .content-section {
-            display: none;
-        }
-        .content-section.active {
-            display: block;
-        }
-        .stack-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: #f9fafb;
-            padding: 1.5rem;
-            margin-bottom: 1rem;
-            border-radius: 0.75rem;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-            transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.3s ease;
-        }
-        .stack-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
-        }
-        .stack-item h2 {
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: #1f2937;
-            margin-bottom: 0.5rem;
-            text-transform: uppercase;
-        }
-        .stack-item p {
-            color: #4b5563;
-            font-size: 1rem;
-            text-transform: uppercase;
-        }
-        .download-button {
-            background-color: #3b82f6;
-            color: #ffffff;
-            font-weight: 600;
-            padding: 0.75rem 1.5rem;
-            border-radius: 9999px;
+        .navbar a {
+            color: white;
             text-decoration: none;
-            transition: background-color 0.2s ease;
-            text-transform: uppercase;
+            font-size: 18px;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
         }
-        .download-button:hover {
-            background-color: #2563eb;
-        }
-
-        /* DARK MODE STYLES */
-        body.dark {
-            background-color: #1f2937;
-            color: #e5e7eb;
-        }
-        .dark .container {
-            background-color: #374151;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-        }
-        .dark .header {
-            background-color: #4b5563;
-            border-bottom-color: #6b7280;
-        }
-        .dark .tabs {
-            background-color: #4b5563;
-            border-bottom-color: #6b7280;
-        }
-        .dark .tab-button {
-            color: #d1d5db;
-        }
-        .dark .tab-button.active {
-            background-color: #374151;
-            color: #e5e7eb;
-            border-bottom-color: #3b82f6;
-        }
-        .dark .stack-item {
-            background-color: #4b5563;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-        }
-        .dark .stack-item:hover {
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-        }
-        .dark .stack-item h2 {
-            color: #f9fafb;
-        }
-        .dark .stack-item p {
-            color: #d1d5db;
+        .navbar a:hover {
+            background-color: #555;
         }
         .theme-toggle {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            padding: 0.5rem 1rem;
-            border-radius: 9999px;
-            background-color: #e5e7eb;
-            color: #1f2937;
-            font-weight: 600;
+            position: fixed;
+            top: 15px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 24px;
             cursor: pointer;
-            transition: background-color 0.3s ease, color 0.3s ease;
+            transition: color 0.3s;
         }
-        .dark .theme-toggle {
-            background-color: #4b5563;
-            color: #f9fafb;
+        body.light .theme-toggle {
+            color: #333;
+        }
+        body.dark .theme-toggle {
+            color: #e0e0e0;
+        }
+        .logo {
+            text-align: center;
+            margin: 80px 0 40px;
+        }
+        .logo img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            max-width: 1200px;
+        }
+        .card {
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s, color 0.3s;
+            position: relative;
+            margin-bottom: 20px;
+        }
+        body.light .card {
+            background: white;
+            color: #333;
+        }
+        body.dark .card {
+            background: #2c2c2c;
+            color: #e0e0e0;
+        }
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        .card img {
+            width: 50px;
+            height: 50px;
+            margin-bottom: 10px;
+        }
+        .card a {
+            text-decoration: none;
+            font-weight: bold;
+            display: block;
+            margin-top: 10px;
+            background-color: #007bff; /* Blue background for download buttons */
+            color: white; /* White text for contrast */
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .card a:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+        }
+        .page {
+            display: none;
+        }
+        .page.active {
+            display: block;
+        }
+        .coming-soon {
+            font-size: 24px;
+            font-weight: bold;
+            padding: 40px;
         }
     </style>
 </head>
-<body>
+<body class="light">
+    <div class="navbar">
+        <a href="#esign" onclick="showPage('esign')">ESign</a>
+        <a href="#certificates" onclick="showPage('certificates')">Certificates</a>
+        <a href="#dns" onclick="showPage('dns')">DNS</a>
+        <a href="#ksign" onclick="showPage('ksign')">KSign</a>
+        <a href="#ksign-cert" onclick="showPage('ksign-cert')">KSign Cert</a>
+    </div>
+
+    <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
+
+    <div class="logo">
+        <img src="https://khoindvn.io.vn/img/pf/profile-pic.png" alt="Site Logo">
+    </div>
 
     <div class="container">
-        <button class="theme-toggle" id="theme-toggle">CHẾ ĐỘ TỐI</button>
-        <div class="header">
-            <div class="logo-container">
-                <img src="https://khoindvn.io.vn/img/pf/profile-pic.png" alt="Logo" class="logo">
+        <!-- ESign Page -->
+        <div id="esign" class="page active">
+            <div class="card">
+                <img src="https://khoindvn.io.vn/img/pf/profile-pic.png" alt="ESign Logo">
+                <h3>ESign ✅</h3>
+                <a href="https://authtool.app/app-store/nAHgTgSYRq">Download</a>
+            </div>
+            <div class="card">
+                <img src="https://khoindvn.io.vn/img/pf/profile-pic.png" alt="ESign Logo">
+                <h3>GLOBAL TAKEOFF, INC</h3>
+                <a href="https://authtool.app/app-store/t4bpVBfp23">Download</a>
+            </div>
+            <div class="card">
+                <img src="https://khoindvn.io.vn/img/pf/profile-pic.png" alt="ESign Logo">
+                <h3>ESign</h3>
+                <a href="https://authtool.app/app-store/5xSKZxvTfs">Download</a>
+            </div>
+            <div class="card">
+                <img src="https://khoindvn.io.vn/img/pf/profile-pic.png" alt="ESign Logo">
+                <h3>Tianjin University of Commerce</h3>
+                <a href="https://authtool.app/app-store/y649WtILBw">Download</a>
+            </div>
+            <div class="card">
+                <img src="https://khoindvn.io.vn/img/pf/profile-pic.png" alt="ESign Logo">
+                <h3>BMW Brilliance Automotive Ltd</h3>
+                <a href="https://authtool.app/app-store/riMS9UyHoQ">Download</a>
+            </div>
+            <div class="card">
+                <img src="https://khoindvn.io.vn/img/pf/profile-pic.png" alt="ESign Logo">
+                <h3>VIETNAM JOINT STOCK COMMERCIAL BANK FOR INDUSTRY AND TRADE</h3>
+                <a href="https://authtool.app/app-store/gClSJlDteE">Download</a>
+            </div>
+            <div class="card">
+                <img src="https://khoindvn.io.vn/img/pf/profile-pic.png" alt="ESign Logo">
+                <h3>VIETTEL GROUP</h3>
+                <a href="https://authtool.app/app-store/rPNr5Procw">Download</a>
+            </div>
+            <div class="card">
+                <img src="https://khoindvn.io.vn/img/pf/profile-pic.png" alt="ESign Logo">
+                <h3>CHIBA INSTITUTE OF TECHNOLOGY</h3>
+                <a href="https://authtool.app/app-store/I65qsM4tuy">Download</a>
+            </div>
+            <div class="card">
+                <img src="https://khoindvn.io.vn/img/pf/profile-pic.png" alt="ESign Logo">
+                <h3>Beijing Esensoft Co., Ltd</h3>
+                <a href="https://authtool.app/app-store/ox7O1yac1w">Download</a>
+            </div>
+            <div class="card">
+                <img src="https://khoindvn.io.vn/img/pf/profile-pic.png" alt="ESign Logo">
+                <h3>NREH ESTATE INFORMATION TECHNOLOGY CO.,LTD</h3>
+                <a href="https://authtool.app/app-store/ckT3TDEz8a">Download</a>
+            </div>
+            <div class="card">
+                <img src="https://khoindvn.io.vn/img/pf/profile-pic.png" alt="ESign Logo">
+                <h3>China Railway Eryuan Engineering Group Co., Ltd.</h3>
+                <a href="https://authtool.app/app-store/jtgd18Qy0i">Download</a>
+            </div>
+            <div class="card">
+                <img src="https://khoindvn.io.vn/img/pf/profile-pic.png" alt="ESign Logo">
+                <h3>EEO Education Ltd</h3>
+                <a href="https://authtool.app/app-store/0dnOlp0bhT">Download</a>
+            </div>
+            <div class="card">
+                <img src="https://khoindvn.io.vn/img/pf/profile-pic.png" alt="ESign Logo">
+                <h3>TCL household Appliance Marketing Co., LTD</h3>
+                <a href="https://authtool.app/app-store/R8Jqm1Cszg">Download</a>
+            </div>
+            <div class="card">
+                <img src="https://khoindvn.io.vn/img/pf/profile-pic.png" alt="ESign Logo">
+                <h3>Wuling Power Corporation</h3>
+                <a href="https://authtool.app/app-store/R8Jqm1Cszg">Download</a>
+            </div>
+            <div class="card">
+                <img src="https://khoindvn.io.vn/img/pf/profile-pic.png" alt="ESign Logo">
+                <h3>GAC TOYOTA MOTOR CO.,LTD</h3>
+                <a href="https://authtool.app/app-store/R8Jqm1Cszg">Download</a>
             </div>
         </div>
 
-        <div class="tabs">
-            <button class="tab-button active" data-tab="esign">ESIGN</button>
-            <button class="tab-button" data-tab="certificates">CERTIFICATES</button>
-            <button class="tab-button" data-tab="dns">DNS</button>
-            <button class="tab-button" data-tab="ksign">KSIGN</button>
-            <button class="tab-button" data-tab="ksign-cert">KSIGN CERT</button>
+        <!-- Certificates Page -->
+        <div id="certificates" class="page">
+            <div class="card">
+                <span>📜</span>
+                <h3>Beijing Esensoft Co., Ltd</h3>
+                <a href="https://www.mediafire.com/file/7wh4eolid4mhusk/Beijing_Esensoft_Co.%252C_Ltd..esigncert/file">Download</a>
+            </div>
+            <div class="card">
+                <span>📜</span>
+                <h3>BMW Brilliance Automotive Ltd</h3>
+                <a href="https://www.mediafire.com/file/kz8myf2yu90yfuo/BMW_Brilliance_Automotive_Ltd..esigncert/file">Download</a>
+            </div>
+            <div class="card">
+                <span>📜</span>
+                <h3>CHIBA INSTITUTE OF TECHNOLOGY</h3>
+                <a href="https://www.mediafire.com/file/ykv89uksqpjgppm/CHIBA_INSTITUTE_OF_TECHNOLOGY.esigncert/file">Download</a>
+            </div>
+            <div class="card">
+                <span>📜</span>
+                <h3>China Railway Eryuan Engineering Group Co., Ltd.</h3>
+                <a href="https://www.mediafire.com/file/zgvgrkvkeumu9rv/China_Railway_Eryuan_Engineering_Group_Co.%252C_Ltd..esigncert/file">Download</a>
+            </div>
+            <div class="card">
+                <span>📜</span>
+                <h3>EEO Education Ltd</h3>
+                <a href="https://www.mediafire.com/file/wbi3h1tm33piugl/EEO_Education_Ltd..esigncert/file">Download</a>
+            </div>
+            <div class="card">
+                <span>📜</span>
+                <h3>GAC TOYOTA MOTOR CO.,LTD</h3>
+                <a href="https://www.mediafire.com/file/b7no9uwb6c96wa7/GAC_TOYOTA_MOTOR_CO.%252CLTD.esigncert/file">Download</a>
+            </div>
+            <div class="card">
+                <span>📜</span>
+                <h3>GLOBAL TAKEOFF, INC</h3>
+                <a href="https://www.mediafire.com/file/nuh39kdzopyjcr8/GLOBAL_TAKEOFF%252C_INC.esigncert/file">Download</a>
+            </div>
+            <div class="card">
+                <span>📜</span>
+                <h3>NREH ESTATE INFORMATION TECHNOLOGY CO.,LTD</h3>
+                <a href="https://www.mediafire.com/file/767z9dof0r4f0xe/NREH_ESTATE_INFORMATION_TECHNOLOGY_CO.%252CLTD..esigncert/file">Download</a>
+            </div>
+            <div class="card">
+                <span>📜</span>
+                <h3>TCL household Appliance Marketing Co., LTD</h3>
+                <a href="https://www.mediafire.com/file/wlz5543l64e7wck/TCL_household_Appliance_Marketing_Co.%252C_LTD.esigncert/file">Download</a>
+            </div>
+            <div class="card">
+                <span>📜</span>
+                <h3>Tianjin University of Commerce</h3>
+                <a href="https://www.mediafire.com/file/x7aowskezgodxji/Tianjin_University_of_Commerce.esigncert/file">Download</a>
+            </div>
+            <div class="card">
+                <span>📜</span>
+                <h3>VIETNAM JOINT STOCK COMMERCIAL BANK FOR INDUSTRY AND TRADE</h3>
+                <a href="https://www.mediafire.com/file/jutoz8gub5lrsr2/VIETNAM_JOINT_STOCK_COMMERCIAL_BANK_FOR_INDUSTRY_AND_TRADE.esigncert/file">Download</a>
+            </div>
+            <div class="card">
+                <span>📜</span>
+                <h3>VIETTEL GROUP</h3>
+                <a href="https://www.mediafire.com/file/cp2moy7c42708mw/VIETTEL_GROUP.esigncert/file">Download</a>
+            </div>
+            <div class="card">
+                <span>📜</span>
+                <h3>Wuling Power Corporation</h3>
+                <a href="https://www.mediafire.com/file/1lrmulnt0ngy5fs/Wuling_Power_Corporation.esigncert/file">Download</a>
+            </div>
         </div>
 
-        <div class="tab-content">
-            <div id="esign" class="content-section active">
-                <h1 class="text-2xl font-bold mb-6">TRANG ESIGN</h1>
-                <div class="space-y-4">
-                    <div class="stack-item">
-                        <div class="flex items-center gap-4">
-                            <img src="https://khoindvn.io.vn/img/pf/profile-pic.png" alt="ESign Logo" class="w-12 h-12 rounded-full">
-                            <div>
-                                <h2 class="text-lg font-semibold">ESIGN ✅</h2>
-                                <p class="text-gray-600">GLOBAL TAKEOFF, INC</p>
-                            </div>
-                        </div>
-                        <a href="https://authtool.app/app-store/nAHgTgSYRq" class="download-button">TẢI XUỐNG</a>
-                    </div>
-                    <div class="stack-item">
-                        <div class="flex items-center gap-4">
-                            <img src="https://khoindvn.io.vn/img/pf/profile-pic.png" alt="ESign Logo" class="w-12 h-12 rounded-full">
-                            <div>
-                                <h2 class="text-lg font-semibold">ESIGN</h2>
-                                <p class="text-gray-600">TIANJIN UNIVERSITY OF COMMERCE</p>
-                            </div>
-                        </div>
-                        <a href="https://authtool.app/app-store/t4bpVBfp23" class="download-button">TẢI XUỐNG</a>
-                    </div>
-                    <div class="stack-item">
-                        <div class="flex items-center gap-4">
-                            <img src="https://khoindvn.io.vn/img/pf/profile-pic.png" alt="ESign Logo" class="w-12 h-12 rounded-full">
-                            <div>
-                                <h2 class="text-lg font-semibold">ESIGN</h2>
-                                <p class="text-gray-600">BMW BRILLIANCE AUTOMOTIVE LTD</p>
-                            </div>
-                        </div>
-                        <a href="https://authtool.app/app-store/5xSKZxvTfs" class="download-button">TẢI XUỐNG</a>
-                    </div>
-                    <div class="stack-item">
-                        <div class="flex items-center gap-4">
-                            <img src="https://khoindvn.io.vn/img/pf/profile-pic.png" alt="ESign Logo" class="w-12 h-12 rounded-full">
-                            <div>
-                                <h2 class="text-lg font-semibold">ESIGN</h2>
-                                <p class="text-gray-600">VIETNAM JOINT STOCK COMMERCIAL BANK FOR INDUSTRY AND TRADE</p>
-                            </div>
-                        </div>
-                        <a href="https://authtool.app/app-store/y649WtILBw" class="download-button">TẢI XUỐNG</a>
-                    </div>
-                    <div class="stack-item">
-                        <div class="flex items-center gap-4">
-                            <img src="https://khoindvn.io.vn/img/pf/profile-pic.png" alt="ESign Logo" class="w-12 h-12 rounded-full">
-                            <div>
-                                <h2 class="text-lg font-semibold">ESIGN</h2>
-                                <p class="text-gray-600">VIETTEL GROUP</p>
-                            </div>
-                        </div>
-                        <a href="https://authtool.app/app-store/riMS9UyHoQ" class="download-button">TẢI XUỐNG</a>
-                    </div>
-                    <div class="stack-item">
-                        <div class="flex items-center gap-4">
-                            <img src="https://khoindvn.io.vn/img/pf/profile-pic.png" alt="ESign Logo" class="w-12 h-12 rounded-full">
-                            <div>
-                                <h2 class="text-lg font-semibold">ESIGN</h2>
-                                <p class="text-gray-600">CHIBA INSTITUTE OF TECHNOLOGY</p>
-                            </div>
-                        </div>
-                        <a href="https://authtool.app/app-store/gClSJlDteE" class="download-button">TẢI XUỐNG</a>
-                    </div>
-                    <div class="stack-item">
-                        <div class="flex items-center gap-4">
-                            <img src="https://khoindvn.io.vn/img/pf/profile-pic.png" alt="ESign Logo" class="w-12 h-12 rounded-full">
-                            <div>
-                                <h2 class="text-lg font-semibold">ESIGN</h2>
-                                <p class="text-gray-600">BEIJING ESENSOFT CO., LTD</p>
-                            </div>
-                        </div>
-                        <a href="https://authtool.app/app-store/rPNr5Procw" class="download-button">TẢI XUỐNG</a>
-                    </div>
-                    <div class="stack-item">
-                        <div class="flex items-center gap-4">
-                            <img src="https://khoindvn.io.vn/img/pf/profile-pic.png" alt="ESign Logo" class="w-12 h-12 rounded-full">
-                            <div>
-                                <h2 class="text-lg font-semibold">ESIGN</h2>
-                                <p class="text-gray-600">NREH ESTATE INFORMATION TECHNOLOGY CO.,LTD</p>
-                            </div>
-                        </div>
-                        <a href="https://authtool.app/app-store/I65qsM4tuy" class="download-button">TẢI XUỐNG</a>
-                    </div>
-                    <div class="stack-item">
-                        <div class="flex items-center gap-4">
-                            <img src="https://khoindvn.io.vn/img/pf/profile-pic.png" alt="ESign Logo" class="w-12 h-12 rounded-full">
-                            <div>
-                                <h2 class="text-lg font-semibold">ESIGN</h2>
-                                <p class="text-gray-600">CHINA RAILWAY ERYUAN ENGINEERING GROUP CO., LTD.</p>
-                            </div>
-                        </div>
-                        <a href="https://authtool.app/app-store/ox7O1yac1w" class="download-button">TẢI XUỐNG</a>
-                    </div>
-                    <div class="stack-item">
-                        <div class="flex items-center gap-4">
-                            <img src="https://khoindvn.io.vn/img/pf/profile-pic.png" alt="ESign Logo" class="w-12 h-12 rounded-full">
-                            <div>
-                                <h2 class="text-lg font-semibold">ESIGN</h2>
-                                <p class="text-gray-600">EEO EDUCATION LTD</p>
-                            </div>
-                        </div>
-                        <a href="https://authtool.app/app-store/ckT3TDEz8a" class="download-button">TẢI XUỐNG</a>
-                    </div>
-                    <div class="stack-item">
-                        <div class="flex items-center gap-4">
-                            <img src="https://khoindvn.io.vn/img/pf/profile-pic.png" alt="ESign Logo" class="w-12 h-12 rounded-full">
-                            <div>
-                                <h2 class="text-lg font-semibold">ESIGN</h2>
-                                <p class="text-gray-600">TCL HOUSEHOLD APPLIANCE MARKETING CO., LTD</p>
-                            </div>
-                        </div>
-                        <a href="https://authtool.app/app-store/jtgd18Qy0i" class="download-button">TẢI XUỐNG</a>
-                    </div>
-                    <div class="stack-item">
-                        <div class="flex items-center gap-4">
-                            <img src="https://khoindvn.io.vn/img/pf/profile-pic.png" alt="ESign Logo" class="w-12 h-12 rounded-full">
-                            <div>
-                                <h2 class="text-lg font-semibold">ESIGN</h2>
-                                <p class="text-gray-600">WULING POWER CORPORATION</p>
-                            </div>
-                        </div>
-                        <a href="https://authtool.app/app-store/0dnOlp0bhT" class="download-button">TẢI XUỐNG</a>
-                    </div>
-                    <div class="stack-item">
-                        <div class="flex items-center gap-4">
-                            <img src="https://khoindvn.io.vn/img/pf/profile-pic.png" alt="ESign Logo" class="w-12 h-12 rounded-full">
-                            <div>
-                                <h2 class="text-lg font-semibold">ESIGN</h2>
-                                <p class="text-gray-600">GAC TOYOTA MOTOR CO.,LTD</p>
-                            </div>
-                        </div>
-                        <a href="https://authtool.app/app-store/R8Jqm1Cszg" class="download-button">TẢI XUỐNG</a>
-                    </div>
-                </div>
+        <!-- DNS Page -->
+        <div id="dns" class="page">
+            <div class="card">
+                <span>🔰</span>
+                <h3>Install DNS Profile</h3>
+                <a href="https://www.mediafire.com/file/x0tyvbl9qkx2ykx/signed_DNS+V1.mobileconfig/file">Download</a>
             </div>
+        </div>
 
-            <div id="certificates" class="content-section">
-                <h1 class="text-2xl font-bold mb-6">TRANG CERTIFICATES</h1>
-                <div class="space-y-4">
-                    <div class="stack-item">
-                        <div class="flex items-center gap-4">
-                            <div class="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center text-3xl dark:bg-gray-700">📜</div>
-                            <div>
-                                <h2 class="text-lg font-semibold">BEIJING ESENSOFT CO., LTD</h2>
-                                <p class="text-gray-600">TẢI CHỨNG CHỈ ESIGN</p>
-                            </div>
-                        </div>
-                        <a href="https://www.mediafire.com/file/7wh4eolid4mhusk/Beijing_Esensoft_Co.%252C_Ltd..esigncert/file" class="download-button">TẢI XUỐNG</a>
-                    </div>
-                    <div class="stack-item">
-                        <div class="flex items-center gap-4">
-                            <div class="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center text-3xl dark:bg-gray-700">📜</div>
-                            <div>
-                                <h2 class="text-lg font-semibold">BMW BRILLIANCE AUTOMOTIVE LTD</h2>
-                                <p class="text-gray-600">TẢI CHỨNG CHỈ ESIGN</p>
-                            </div>
-                        </div>
-                        <a href="https://www.mediafire.com/file/kz8myf2yu90yfuo/BMW_Brilliance_Automotive_Ltd..esigncert/file" class="download-button">TẢI XUỐNG</a>
-                    </div>
-                    <div class="stack-item">
-                        <div class="flex items-center gap-4">
-                            <div class="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center text-3xl dark:bg-gray-700">📜</div>
-                            <div>
-                                <h2 class="text-lg font-semibold">CHIBA INSTITUTE OF TECHNOLOGY</h2>
-                                <p class="text-gray-600">TẢI CHỨNG CHỈ ESIGN</p>
-                            </div>
-                        </div>
-                        <a href="https://www.mediafire.com/file/ykv89uksqpjgppm/CHIBA_INSTITUTE_OF_TECHNOLOGY.esigncert/file" class="download-button">TẢI XUỐNG</a>
-                    </div>
-                    <div class="stack-item">
-                        <div class="flex items-center gap-4">
-                            <div class="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center text-3xl dark:bg-gray-700">📜</div>
-                            <div>
-                                <h2 class="text-lg font-semibold">CHINA RAILWAY ERYUAN ENGINEERING GROUP CO., LTD.</h2>
-                                <p class="text-gray-600">TẢI CHỨNG CHỈ ESIGN</p>
-                            </div>
-                        </div>
-                        <a href="https://www.mediafire.com/file/zgvgrkvkeumu9rv/China_Railway_Eryuan_Engineering_Group_Co.%252C_Ltd..esigncert/file" class="download-button">TẢI XUỐNG</a>
-                    </div>
-                    <div class="stack-item">
-                        <div class="flex items-center gap-4">
-                            <div class="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center text-3xl dark:bg-gray-700">📜</div>
-                            <div>
-                                <h2 class="text-lg font-semibold">EEO EDUCATION LTD.</h2>
-                                <p class="text-gray-600">TẢI CHỨNG CHỈ ESIGN</p>
-                            </div>
-                        </div>
-                        <a href="https://www.mediafire.com/file/wbi3h1tm33piugl/EEO_Education_Ltd..esigncert/file" class="download-button">TẢI XUỐNG</a>
-                    </div>
-                    <div class="stack-item">
-                        <div class="flex items-center gap-4">
-                            <div class="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center text-3xl dark:bg-gray-700">📜</div>
-                            <div>
-                                <h2 class="text-lg font-semibold">GAC TOYOTA MOTOR CO.,LTD</h2>
-                                <p class="text-gray-600">TẢI CHỨNG CHỈ ESIGN</p>
-                            </div>
-                        </div>
-                        <a href="https://www.mediafire.com/file/b7no9uwb6c96wa7/GAC_TOYOTA_MOTOR_CO.%252CLTD.esigncert/file" class="download-button">TẢI XUỐNG</a>
-                    </div>
-                    <div class="stack-item">
-                        <div class="flex items-center gap-4">
-                            <div class="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center text-3xl dark:bg-gray-700">📜</div>
-                            <div>
-                                <h2 class="text-lg font-semibold">GLOBAL TAKEOFF, INC</h2>
-                                <p class="text-gray-600">TẢI CHỨNG CHỈ ESIGN</p>
-                            </div>
-                        </div>
-                        <a href="https://www.mediafire.com/file/nuh39kdzopyjcr8/GLOBAL_TAKEOFF%252C_INC.esigncert/file" class="download-button">TẢI XUỐNG</a>
-                    </div>
-                    <div class="stack-item">
-                        <div class="flex items-center gap-4">
-                            <div class="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center text-3xl dark:bg-gray-700">📜</div>
-                            <div>
-                                <h2 class="text-lg font-semibold">NREH ESTATE INFORMATION TECHNOLOGY CO.,LTD.</h2>
-                                <p class="text-gray-600">TẢI CHỨNG CHỈ ESIGN</p>
-                            </div>
-                        </div>
-                        <a href="https://www.mediafire.com/file/767z9dof0r4f0xe/NREH_ESTATE_INFORMATION_TECHNOLOGY_CO.%252CLTD..esigncert/file" class="download-button">TẢI XUỐNG</a>
-                    </div>
-                    <div class="stack-item">
-                        <div class="flex items-center gap-4">
-                            <div class="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center text-3xl dark:bg-gray-700">📜</div>
-                            <div>
-                                <h2 class="text-lg font-semibold">TCL HOUSEHOLD APPLIANCE MARKETING CO., LTD</h2>
-                                <p class="text-gray-600">TẢI CHỨNG CHỈ ESIGN</p>
-                            </div>
-                        </div>
-                        <a href="https://www.mediafire.com/file/wlz5543l64e7wck/TCL_household_Appliance_Marketing_Co.%252C_LTD.esigncert/file" class="download-button">TẢI XUỐNG</a>
-                    </div>
-                    <div class="stack-item">
-                        <div class="flex items-center gap-4">
-                            <div class="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center text-3xl dark:bg-gray-700">📜</div>
-                            <div>
-                                <h2 class="text-lg font-semibold">TIANJIN UNIVERSITY OF COMMERCE</h2>
-                                <p class="text-gray-600">TẢI CHỨNG CHỈ ESIGN</p>
-                            </div>
-                        </div>
-                        <a href="https://www.mediafire.com/file/x7aowskezgodxji/Tianjin_University_of_Commerce.esigncert/file" class="download-button">TẢI XUỐNG</a>
-                    </div>
-                    <div class="stack-item">
-                        <div class="flex items-center gap-4">
-                            <div class="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center text-3xl dark:bg-gray-700">📜</div>
-                            <div>
-                                <h2 class="text-lg font-semibold">VIETNAM JOINT STOCK COMMERCIAL BANK FOR INDUSTRY AND TRADE</h2>
-                                <p class="text-gray-600">TẢI CHỨNG CHỈ ESIGN</p>
-                            </div>
-                        </div>
-                        <a href="https://www.mediafire.com/file/jutoz8gub5lrsr2/VIETNAM_JOINT_STOCK_COMMERCIAL_BANK_FOR_INDUSTRY_AND_TRADE.esigncert/file" class="download-button">TẢI XUỐNG</a>
-                    </div>
-                    <div class="stack-item">
-                        <div class="flex items-center gap-4">
-                            <div class="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center text-3xl dark:bg-gray-700">📜</div>
-                            <div>
-                                <h2 class="text-lg font-semibold">VIETTEL GROUP</h2>
-                                <p class="text-gray-600">TẢI CHỨNG CHỈ ESIGN</p>
-                            </div>
-                        </div>
-                        <a href="https://www.mediafire.com/file/cp2moy7c42708mw/VIETTEL_GROUP.esigncert/file" class="download-button">TẢI XUỐNG</a>
-                    </div>
-                    <div class="stack-item">
-                        <div class="flex items-center gap-4">
-                            <div class="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center text-3xl dark:bg-gray-700">📜</div>
-                            <div>
-                                <h2 class="text-lg font-semibold">WULING POWER CORPORATION</h2>
-                                <p class="text-gray-600">TẢI CHỨNG CHỈ ESIGN</p>
-                            </div>
-                        </div>
-                        <a href="https://www.mediafire.com/file/1lrmulnt0ngy5fs/Wuling_Power_Corporation.esigncert/file" class="download-button">TẢI XUỐNG</a>
-                    </div>
-                </div>
+        <!-- KSign Page -->
+        <div id="ksign" class="page">
+            <div class="card">
+                <img src="https://khoindvn.io.vn/img/pf/ksign.png" alt="KSign Logo">
+                <h3>KSign</h3>
+                <a href="https://authtool.app/app-store/G8kHDanYo1">Download</a>
             </div>
+            <div class="card">
+                <img src="https://khoindvn.io.vn/img/pf/ksign.png" alt="KSign Logo">
+                <h3>VIETNAM JOINT STOCK COMMERCIAL BANK FOR INDUSTRY AND TRADE</h3>
+                <a href="https://authtool.app/app-store/HbIC5oMvP2">Download</a>
+            </div>
+            <div class="card">
+                <img src="https://khoindvn.io.vn/img/pf/ksign.png" alt="KSign Logo">
+                <h3>VIETTEL GROUP</h3>
+                <a href="https://authtool.app/app-store/n2ihKifqmc">Download</a>
+            </div>
+            <div class="card">
+                <img src="https://khoindvn.io.vn/img/pf/ksign.png" alt="KSign Logo">
+                <h3>CHIBA INSTITUTE OF TECHNOLOGY</h3>
+                <a href="https://authtool.app/app-store/rs6ZINiMIp">Download</a>
+            </div>
+            <div class="card">
+                <img src="https://khoindvn.io.vn/img/pf/ksign.png" alt="KSign Logo">
+                <h3>NREH ESTATE INFORMATION TECHNOLOGY CO.,LTD</h3>
+                <a href="https://authtool.app/app-store/TF6aOa2wEE">Download</a>
+            </div>
+            <div class="card">
+                <img src="https://khoindvn.io.vn/img/pf/ksign.png" alt="KSign Logo">
+                <h3>Beijing Esensoft Co</h3>
+                <a href="https://authtool.app/app-store/8P6oMQLqxN">Download</a>
+            </div>
+            <div class="card">
+                <img src="https://khoindvn.io.vn/img/pf/ksign.png" alt="KSign Logo">
+                <h3>China Railway Eryuan Engineering Group</h3>
+                <a href="https://authtool.app/app-store/JHwmP5aYDf">Download</a>
+            </div>
+            <div class="card">
+                <img src="https://khoindvn.io.vn/img/pf/ksign.png" alt="KSign Logo">
+                <h3>EEO Education Ltd</h3>
+                <a href="https://authtool.app/app-store/VQ6V095fB7">Download</a>
+            </div>
+            <div class="card">
+                <img src="https://khoindvn.io.vn/img/pf/ksign.png" alt="KSign Logo">
+                <h3>TCL household Appliance Marketing Co</h3>
+                <a href="https://authtool.app/app-store/2k0oSEbZ1j">Download</a>
+            </div>
+            <div class="card">
+                <img src="https://khoindvn.io.vn/img/pf/ksign.png" alt="KSign Logo">
+                <h3>Wuling Power Corporation</h3>
+                <a href="https://authtool.app/app-store/2RiQSCFIFy">Download</a>
+            </div>
+            <div class="card">
+                <img src="https://khoindvn.io.vn/img/pf/ksign.png" alt="KSign Logo">
+                <h3>GAC TOYOTA MOTOR CO</h3>
+                <a href="https://authtool.app/app-store/2RiQSCFIFy">Download</a>
+            </div>
+        </div>
 
-            <div id="dns" class="content-section">
-                <h1 class="text-2xl font-bold mb-6">TRANG DNS</h1>
-                <div class="stack-item">
-                    <div class="flex items-center gap-4">
-                        <div class="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center text-3xl dark:bg-gray-700">🔰</div>
-                        <div>
-                            <h2 class="text-lg font-semibold">INSTALL DNS PROFILE</h2>
-                            <p class="text-gray-600">NHẤN VÀO ĐÂY ĐỂ CÀI ĐẶT CẤU HÌNH DNS</p>
-                        </div>
-                    </div>
-                    <a href="https://www.mediafire.com/file/v11zj71ucep35pn/DNS-ATRV_V1.mobileconfig/file" class="download-button">TẢI XUỐNG</a>
-                </div>
-                <div class="stack-item">
-                    <div class="flex items-center gap-4">
-                        <div class="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center text-3xl dark:bg-gray-700">🔰</div>
-                        <div>
-                            <h2 class="text-lg font-semibold">NEXT DNS (CCCA)</h2>
-                            <p class="text-gray-600">NHẤN VÀO ĐÂY ĐỂ TẢI CẤU HÌNH</p>
-                        </div>
-                    </div>
-                    <a href="Https://tinyurl.com/43ex3yvz" class="download-button">TẢI XUỐNG</a>
-                </div>
-            </div>
-
-            <div id="ksign" class="content-section">
-                <h1 class="text-2xl font-bold mb-6">TRANG KSIGN</h1>
-                <div class="space-y-4">
-                    <div class="stack-item">
-                        <div class="flex items-center gap-4">
-                            <img src="https://khoindvn.io.vn/img/pf/ksign.png" alt="KSIGN LOGO" class="w-12 h-12 rounded-full">
-                            <div>
-                                <h2 class="text-lg font-semibold">KSIGN</h2>
-                                <p class="text-gray-600">VIETNAM JOINT STOCK COMMERCIAL BANK FOR INDUSTRY AND TRADE</p>
-                            </div>
-                        </div>
-                        <a href="https://authtool.app/app-store/G8kHDanYo1" class="download-button">TẢI XUỐNG</a>
-                    </div>
-                    <div class="stack-item">
-                        <div class="flex items-center gap-4">
-                            <img src="https://khoindvn.io.vn/img/pf/ksign.png" alt="KSIGN LOGO" class="w-12 h-12 rounded-full">
-                            <div>
-                                <h2 class="text-lg font-semibold">KSIGN</h2>
-                                <p class="text-gray-600">VIETTEL GROUP</p>
-                            </div>
-                        </div>
-                        <a href="https://authtool.app/app-store/HbIC5oMvP2" class="download-button">TẢI XUỐNG</a>
-                    </div>
-                    <div class="stack-item">
-                        <div class="flex items-center gap-4">
-                            <img src="https://khoindvn.io.vn/img/pf/ksign.png" alt="KSIGN LOGO" class="w-12 h-12 rounded-full">
-                            <div>
-                                <h2 class="text-lg font-semibold">KSIGN</h2>
-                                <p class="text-gray-600">CHIBA INSTITUTE OF TECHNOLOGY</p>
-                            </div>
-                        </div>
-                        <a href="https://authtool.app/app-store/n2ihKifqmc" class="download-button">TẢI XUỐNG</a>
-                    </div>
-                    <div class="stack-item">
-                        <div class="flex items-center gap-4">
-                            <img src="https://khoindvn.io.vn/img/pf/ksign.png" alt="KSIGN LOGO" class="w-12 h-12 rounded-full">
-                            <div>
-                                <h2 class="text-lg font-semibold">KSIGN</h2>
-                                <p class="text-gray-600">NREH ESTATE INFORMATION TECHNOLOGY CO.,LTD</p>
-                            </div>
-                        </div>
-                        <a href="https://authtool.app/app-store/rs6ZINiMIp" class="download-button">TẢI XUỐNG</a>
-                    </div>
-                    <div class="stack-item">
-                        <div class="flex items-center gap-4">
-                            <img src="https://khoindvn.io.vn/img/pf/ksign.png" alt="KSIGN LOGO" class="w-12 h-12 rounded-full">
-                            <div>
-                                <h2 class="text-lg font-semibold">KSIGN</h2>
-                                <p class="text-gray-600">BEIJING ESENSOFT CO</p>
-                            </div>
-                        </div>
-                        <a href="https://authtool.app/app-store/TF6aOa2wEE" class="download-button">TẢI XUỐNG</a>
-                    </div>
-                    <div class="stack-item">
-                        <div class="flex items-center gap-4">
-                            <img src="https://khoindvn.io.vn/img/pf/ksign.png" alt="KSIGN LOGO" class="w-12 h-12 rounded-full">
-                            <div>
-                                <h2 class="text-lg font-semibold">KSIGN</h2>
-                                <p class="text-gray-600">CHINA RAILWAY ERYUAN ENGINEERING GROUP</p>
-                            </div>
-                        </div>
-                        <a href="https://authtool.app/app-store/8P6oMQLqxN" class="download-button">TẢI XUỐNG</a>
-                    </div>
-                    <div class="stack-item">
-                        <div class="flex items-center gap-4">
-                            <img src="https://khoindvn.io.vn/img/pf/ksign.png" alt="KSIGN LOGO" class="w-12 h-12 rounded-full">
-                            <div>
-                                <h2 class="text-lg font-semibold">KSIGN</h2>
-                                <p class="text-gray-600">EEO EDUCATION LTD</p>
-                            </div>
-                        </div>
-                        <a href="https://authtool.app/app-store/JHwmP5aYDf" class="download-button">TẢI XUỐNG</a>
-                    </div>
-                    <div class="stack-item">
-                        <div class="flex items-center gap-4">
-                            <img src="https://khoindvn.io.vn/img/pf/ksign.png" alt="KSIGN LOGO" class="w-12 h-12 rounded-full">
-                            <div>
-                                <h2 class="text-lg font-semibold">KSIGN</h2>
-                                <p class="text-gray-600">TCL HOUSEHOLD APPLIANCE MARKETING CO</p>
-                            </div>
-                        </div>
-                        <a href="https://authtool.app/app-store/VQ6V095fB7" class="download-button">TẢI XUỐNG</a>
-                    </div>
-                    <div class="stack-item">
-                        <div class="flex items-center gap-4">
-                            <img src="https://khoindvn.io.vn/img/pf/ksign.png" alt="KSIGN LOGO" class="w-12 h-12 rounded-full">
-                            <div>
-                                <h2 class="text-lg font-semibold">KSIGN</h2>
-                                <p class="text-gray-600">WULING POWER CORPORATION</p>
-                            </div>
-                        </div>
-                        <a href="https://authtool.app/app-store/2k0oSEbZ1j" class="download-button">TẢI XUỐNG</a>
-                    </div>
-                    <div class="stack-item">
-                        <div class="flex items-center gap-4">
-                            <img src="https://khoindvn.io.vn/img/pf/ksign.png" alt="KSIGN LOGO" class="w-12 h-12 rounded-full">
-                            <div>
-                                <h2 class="text-lg font-semibold">KSIGN</h2>
-                                <p class="text-gray-600">GAC TOYOTA MOTOR CO</p>
-                            </div>
-                        </div>
-                        <a href="https://authtool.app/app-store/2RiQSCFIFy" class="download-button">TẢI XUỐNG</a>
-                    </div>
-                </div>
-            </div>
-            <div id="ksign-cert" class="content-section">
-                <h1 class="text-2xl font-bold mb-6">TRANG KSIGN CERT</h1>
-                <div class="flex items-center justify-center p-8 bg-gray-100 dark:bg-gray-700 rounded-lg shadow-md">
-                    <p class="text-4xl font-bold text-gray-800 dark:text-white">COMING SOON!</p>
-                </div>
+        <!-- KSign Cert Page -->
+        <div id="ksign-cert" class="page">
+            <div class="card coming-soon">
+                <h3>COMING SOON!</h3>
             </div>
         </div>
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const tabs = document.querySelectorAll('.tab-button');
-            const sections = document.querySelectorAll('.content-section');
-            const themeToggle = document.getElementById('theme-toggle');
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            document.getElementById(pageId).classList.add('active');
+        }
+
+        function toggleTheme() {
             const body = document.body;
-
-            // Load theme preference from localStorage
-            const savedTheme = localStorage.getItem('theme');
-            if (savedTheme === 'dark') {
+            const themeToggle = document.querySelector('.theme-toggle');
+            if (body.classList.contains('light')) {
+                body.classList.remove('light');
                 body.classList.add('dark');
-                themeToggle.textContent = 'CHẾ ĐỘ SÁNG';
+                themeToggle.textContent = '☀️';
+                localStorage.setItem('theme', 'dark');
+            } else {
+                body.classList.remove('dark');
+                body.classList.add('light');
+                themeToggle.textContent = '🌙';
+                localStorage.setItem('theme', 'light');
             }
+        }
 
-            tabs.forEach(tab => {
-                tab.addEventListener('click', () => {
-                    // Remove active class from all tabs and sections
-                    tabs.forEach(t => t.classList.remove('active'));
-                    sections.forEach(s => s.classList.remove('active'));
-
-                    // Add active class to the clicked tab and corresponding section
-                    const targetTab = tab.getAttribute('data-tab');
-                    document.getElementById(targetTab).classList.add('active');
-                    tab.classList.add('active');
-                });
-            });
-
-            themeToggle.addEventListener('click', () => {
-                body.classList.toggle('dark');
-                if (body.classList.contains('dark')) {
-                    localStorage.setItem('theme', 'dark');
-                    themeToggle.textContent = 'CHẾ ĐỘ SÁNG';
-                } else {
-                    localStorage.setItem('theme', 'light');
-                    themeToggle.textContent = 'CHẾ ĐỘ TỐI';
-                }
-            });
+        // Load saved theme from localStorage
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.body.classList.add(savedTheme);
+            document.querySelector('.theme-toggle').textContent = savedTheme === 'light' ? '🌙' : '☀️';
         });
     </script>
-
 </body>
 </html>
