@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>eSign Download</title>
+    <style>
+        :root {
+            --bg-color: #ffffff;
+            --text-color: #000000;
+            --card-bg: #f9f9f9;
+            --button-bg: #007bff;
+            --button-text: #ffffff;
+            --border-color: #e0e0e0;
+            --shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        [data-theme="dark"] {
+            --bg-color: #121212;
+            --text-color: #ffffff;
+            --card-bg: #1e1e1e;
+            --button-bg: #0056b3;
+            --button-text: #ffffff;
+            --border-color: #333333;
+            --shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        header {
+            text-align: center;
+            padding: 20px;
+            background-color: var(--card-bg);
+            border-bottom: 1px solid var(--border-color);
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+        header img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: var(--shadow);
+            margin-bottom: 10px;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2em;
+            color: var(--text-color);
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: var(--card-bg);
+            padding: 10px;
+            border-bottom: 1px solid var(--border-color);
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+        nav button {
+            background: none;
+            border: none;
+            padding: 10px 20px;
+            margin: 0 5px;
+            cursor: pointer;
+            font-size: 1em;
+            color: var(--text-color);
+            border-radius: 20px;
+            transition: background-color 0.3s ease;
+        }
+        nav button:hover, nav button.active {
+            background-color: var(--button-bg);
+            color: var(--button-text);
+        }
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: var(--button-bg);
+            color: var(--button-text);
+            border: none;
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            z-index: 1000;
+        }
+        section {
+            display: none;
+            padding: 40px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        section.active {
+            display: block;
+        }
+        .item {
+            display: flex;
+            align-items: center;
+            background-color: var(--card-bg);
+            margin: 20px 0;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .item:hover {
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+        .item img {
+            width: 60px;
+            height: 60px;
+            border-radius: 10px;
+            object-fit: cover;
+            margin-right: 20px;
+        }
+        .item h3 {
+            margin: 0 0 10px 0;
+            color: var(--text-color);
+        }
+        .download-btn {
+            background-color: var(--button-bg);
+            color: var(--button-text);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: background-color 0.3s ease;
+            margin-left: auto;
+        }
+        .download-btn:hover {
+            background-color: #0056b3;
+        }
+        .update-text {
+            text-align: center;
+            font-size: 1.5em;
+            color: var(--text-color);
+            padding: 40px;
+        }
+        @media (max-width: 768px) {
+            .item {
+                flex-direction: column;
+                text-align: center;
+            }
+            .item img {
+                margin-right: 0;
+                margin-bottom: 10px;
+            }
+            .download-btn {
+                margin-left: 0;
+                margin-top: 10px;
+            }
+            nav {
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+<body data-theme="light">
+    <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
+    
+    <header>
+        <img src="https://khoindvn.io.vn/img/pf/profile-pic.png" alt="Header Image">
+        <h1>ESIGN AND KSIGN</h1>
+    </header>
+    
+    <nav>
+        <button onclick="showSection('esign')" class="active">ESIGN</button>
+        <button onclick="showSection('dns')">DNS</button>
+        <button onclick="showSection('certificates')">CERTIFICATES</button>
+        <button onclick="showSection('ksign')">KSIGN</button>
+    </nav>
+    
+    <section id="esign" class="active">
+        <div class="item">
+            <img src="https://khoindvn.io.vn/img/pf/profile-pic.png" alt="Icon">
+            <div>
+                <h3>ESign ✅ China National Heavy Duty Truck Group Co., Ltd.</h3>
+            </div>
+            <a href="https://authtool.app/app-store/jlkCxhGdT1" class="download-btn" target="_blank">Download</a>
+        </div>
+        <div class="item">
+            <img src="https://khoindvn.io.vn/img/pf/profile-pic.png" alt="Icon">
+            <div>
+                <h3>ESign Guangzhou Huahan Educational & Technology Co.,Ltd</h3>
+            </div>
+            <a href="https://authtool.app/app-store/2SdmML0Agz" class="download-btn" target="_blank">Download</a>
+        </div>
+        <div class="item">
+            <img src="https://khoindvn.io.vn/img/pf/profile-pic.png" alt="Icon">
+            <div>
+                <h3>ESign China Telecommunications Corporation</h3>
+            </div>
+            <a href="https://authtool.app/app-store/Ht8Am7Izuz" class="download-btn" target="_blank">Download</a>
+        </div>
+        <div class="item">
+            <img src="https://khoindvn.io.vn/img/pf/profile-pic.png" alt="Icon">
+            <div>
+                <h3>ESign GLOBAL TAKEOFF, INC</h3>
+            </div>
+            <a href="https://authtool.app/app-store/7nYVuuSYr1" class="download-btn" target="_blank">Download</a>
+        </div>
+        <div class="item">
+            <img src="https://khoindvn.io.vn/img/pf/profile-pic.png" alt="Icon">
+            <div>
+                <h3>ESign Tianjin University of Commerce</h3>
+            </div>
+            <a href="https://authtool.app/app-store/mr2CNCGuw5" class="download-btn" target="_blank">Download</a>
+        </div>
+        <div class="item">
+            <img src="https://khoindvn.io.vn/img/pf/profile-pic.png" alt="Icon">
+            <div>
+                <h3>ESign VIETNAM JOINT STOCK COMMERCIAL BANK FOR INDUSTRY AND TRADE</h3>
+            </div>
+            <a href="https://authtool.app/app-store/fPYx0aUqZ6" class="download-btn" target="_blank">Download</a>
+        </div>
+        <div class="item">
+            <img src="https://khoindvn.io.vn/img/pf/profile-pic.png" alt="Icon">
+            <div>
+                <h3>ESign VIETTEL GROUP</h3>
+            </div>
+            <a href="https://authtool.app/app-store/gdxphzqVMF" class="download-btn" target="_blank">Download</a>
+        </div>
+        <div class="item">
+            <img src="https://khoindvn.io.vn/img/pf/profile-pic.png" alt="Icon">
+            <div>
+                <h3>ESign CHIBA INSTITUTE OF TECHNOLOGY</h3>
+            </div>
+            <a href="https://authtool.app/app-store/c52GfkeM7T" class="download-btn" target="_blank">Download</a>
+        </div>
+        <div class="item">
+            <img src="https://khoindvn.io.vn/img/pf/profile-pic.png" alt="Icon">
+            <div>
+                <h3>ESign Beijing Esensoft Co., Ltd</h3>
+            </div>
+            <a href="https://authtool.app/app-store/WzoVlAzfSa" class="download-btn" target="_blank">Download</a>
+        </div>
+    </section>
+    
+    <section id="dns">
+        <div class="item">
+            <div>
+                <h3>🔰 DNS V3 ( MY DNS )</h3>
+            </div>
+            <a href="https://github.com/trealAGIR/DNS-V3/raw/refs/heads/main/DNS%20V3.mobileconfig" class="download-btn" download>Download</a>
+        </div>
+        <div class="item">
+            <div>
+                <h3>🔰 DNS BY WSF</h3>
+            </div>
+            <a href="https://wsfteam.xyz/files/configurationprofiles/WSF-CP144.mobileconfig" class="download-btn" download>Download</a>
+        </div>
+    </section>
+    
+    <section id="certificates">
+        <div class="item">
+            <div>
+                <h3>📜 FILE ZIP CERT ESIGN AND KSIGN</h3>
+            </div>
+            <a href="https://raw.githubusercontent.com/esigncert/khoindvn/refs/heads/main/document/DNS/Certs-Khoindvn.zip" class="download-btn" download>Download</a>
+        </div>
+    </section>
+    
+    <section id="ksign">
+        <div class="update-text">ĐANG UPDATE</div>
+    </section>
+    
+    <script>
+        function showSection(sectionId) {
+            document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+            document.getElementById(sectionId).classList.add('active');
+            event.target.classList.add('active');
+        }
+        
+        function toggleTheme() {
+            const body = document.body;
+            const currentTheme = body.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            body.setAttribute('data-theme', newTheme);
+            document.querySelector('.theme-toggle').textContent = newTheme === 'dark' ? '☀️' : '🌙';
+        }
+    </script>
+</body>
+</html>
