@@ -86,6 +86,7 @@
             cursor: pointer;
             transition: background-color 0.3s ease;
             z-index: 1000;
+            font-size: 1.3em;
         }
         section {
             display: none;
@@ -161,7 +162,7 @@
     </style>
 </head>
 <body data-theme="light">
-    <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
+    <button class="theme-toggle" onclick="toggleTheme()">Dark Mode</button>
     
     <header>
         <img src="https://khoindvn.io.vn/img/pf/profile-pic.png" alt="Header Image">
@@ -176,17 +177,28 @@
     </nav>
     
     <section id="esign" class="active">
+
+        <!-- MỤC MỚI - ĐẶT LÊN ĐẦU TIÊN -->
         <div class="item">
             <img src="https://khoindvn.io.vn/img/pf/profile-pic.png" alt="Icon">
             <div>
-                <h3>ESign ✅ China National Heavy Duty Truck Group Co., Ltd.</h3>
+                <h3>ESign Etisalat - Emirates Telecommunications Corporation</h3>
+            </div>
+            <a href="https://authtool.app/app-store/RT1p4Zqyyz" class="download-btn" target="_blank">Download</a>
+        </div>
+
+        <!-- Các mục cũ giữ nguyên thứ tự -->
+        <div class="item">
+            <img src="https://khoindvn.io.vn/img/pf/profile-pic.png" alt="Icon">
+            <div>
+                <h3>ESign China National Heavy Duty Truck Group Co., Ltd.</h3>
             </div>
             <a href="https://authtool.app/app-store/jlkCxhGdT1" class="download-btn" target="_blank">Download</a>
         </div>
         <div class="item">
             <img src="https://khoindvn.io.vn/img/pf/profile-pic.png" alt="Icon">
             <div>
-                <h3>ESign Guangzhou Huahan Educational & Technology Co.,Ltd</h3>
+                <h3>ESign Guangzhou Huahan As Technology Co.,Ltd</h3>
             </div>
             <a href="https://authtool.app/app-store/2SdmML0Agz" class="download-btn" target="_blank">Download</a>
         </div>
@@ -244,13 +256,13 @@
     <section id="dns">
         <div class="item">
             <div>
-                <h3>🔰 DNS V3 ( MY DNS )</h3>
+                <h3>DNS V3 ( MY DNS )</h3>
             </div>
             <a href="https://release-assets.githubusercontent.com/github-production-release-asset/1097445216/ca877954-6a46-4d1a-be72-ff25851c4820?sp=r&sv=2018-11-09&sr=b&spr=https&se=2025-11-18T15%3A45%3A44Z&rscd=attachment%3B+filename%3Dsigned_DNS.V3.mobileconfig&rsct=application%2Foctet-stream&skoid=96c2d410-5711-43a1-aedd-ab1947aa7ab0&sktid=398a6654-997b-47e9-b12b-9515b896b4de&skt=2025-11-18T14%3A45%3A31Z&ske=2025-11-18T15%3A45%3A44Z&sks=b&skv=2018-11-09&sig=MpBTmv6KcOkOeT0bBPOwYY4Isi5PVTIjRRw%2FtrCl2%2B4%3D&jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmVsZWFzZS1hc3NldHMuZ2l0aHVidXNlcmNvbnRlbnQuY29tIiwia2V5Ijoia2V5MSIsImV4cCI6MTc2MzQ3Nzk2OSwibmJmIjoxNzYzNDc3NjY5LCJwYXRoIjoicmVsZWFzZWFzc2V0cHJvZHVjdGlvbi5ibG9iLmNvcmUud2luZG93cy5uZXQifQ.Gb-1ur_ttjqgjS9TdXAqb1uXno6InLt72Ya6wRg5i2U&response-content-disposition=attachment%3B%20filename%3Dsigned_DNS.V3.mobileconfig&response-content-type=application%2Foctet-stream" class="download-btn" download>Download</a>
         </div>
         <div class="item">
             <div>
-                <h3>🔰 DNS BY WSF</h3>
+                <h3>DNS BY WSF</h3>
             </div>
             <a href="https://wsfteam.xyz/files/configurationprofiles/WSF-CP144.mobileconfig" class="download-btn" download>Download</a>
         </div>
@@ -259,7 +271,7 @@
     <section id="certificates">
         <div class="item">
             <div>
-                <h3>📜 FILE ZIP CERT ESIGN AND KSIGN</h3>
+                <h3>FILE ZIP CERT ESIGN AND KSIGN</h3>
             </div>
             <a href="https://raw.githubusercontent.com/esigncert/khoindvn/refs/heads/main/document/DNS/Certs-Khoindvn.zip" class="download-btn" download>Download</a>
         </div>
@@ -282,7 +294,7 @@
             const currentTheme = body.getAttribute('data-theme');
             const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
             body.setAttribute('data-theme', newTheme);
-            document.querySelector('.theme-toggle').textContent = newTheme === 'dark' ? '☀️' : '🌙';
+            document.querySelector('.theme-toggle').textContent = newTheme === 'dark' ? 'Light Mode' : 'Dark Mode';
         }
     </script>
 </body>
